@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 #include "option.h"
 
@@ -29,6 +28,16 @@ opt_new_type(custom_t);
 	opt_get_std_types\
 )(o, ptr)
 
+void test_opt_bool(void) {
+	opt_bool_t o = none;
+	assert(is_none(o));
+
+	o = some((bool)(true));
+	assert(!is_none(o));
+	bool b;
+	assert(opt_get(o, &b));
+	assert(b);
+}
 
 void test_opt_char(void) {
 	opt_char_t o = none;
@@ -123,6 +132,8 @@ void test_opt_custom_type(void) {
 }
 
 int main(int argc, char *argv[]) {
+	test_opt_bool();
+	test_opt_char();
 	test_opt_double();
 	test_opt_float();
 	test_opt_int();

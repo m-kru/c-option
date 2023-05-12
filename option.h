@@ -16,6 +16,7 @@
 #define opt_some_custom_types
 
 #define opt_some_std_types\
+	opt_some_case(bool),\
 	opt_some_case(char),\
 	opt_some_case(double),\
 	opt_some_case(float),\
@@ -33,6 +34,7 @@
 #define opt_get_case(type) opt_ ## type ##_t: _opt_ ## type ## _get
 
 #define opt_get_std_types\
+	opt_get_case(bool),\
 	opt_get_case(char),\
 	opt_get_case(double),\
 	opt_get_case(float),\
@@ -67,6 +69,7 @@ bool _opt_ ## type ## _get(opt_ ## type ## _t o, type *i) {\
 	return true;\
 }
 
+opt_new_type(bool);
 opt_new_type(char);
 opt_new_type(double);
 opt_new_type(float);
