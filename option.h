@@ -20,11 +20,14 @@
 	opt_some_case(char),\
 	opt_some_case(double),\
 	opt_some_case(float),\
-	opt_some_case(unsigned),\
 	opt_some_case(int8_t),\
 	opt_some_case(int16_t),\
 	opt_some_case(int32_t),\
-	opt_some_case(int64_t)
+	opt_some_case(int64_t),\
+	opt_some_case(uint8_t),\
+	opt_some_case(uint16_t),\
+	opt_some_case(uint32_t),\
+	opt_some_case(uint64_t)
 
 #define some(x) _Generic((x),\
 	opt_some_custom_types\
@@ -40,11 +43,14 @@
 	opt_get_case(char),\
 	opt_get_case(double),\
 	opt_get_case(float),\
-	opt_get_case(unsigned),\
 	opt_get_case_t(int8_t),\
 	opt_get_case_t(int16_t),\
 	opt_get_case_t(int32_t),\
-	opt_get_case_t(int64_t)
+	opt_get_case_t(int64_t),\
+	opt_get_case_t(uint8_t),\
+	opt_get_case_t(uint16_t),\
+	opt_get_case_t(uint32_t),\
+	opt_get_case_t(uint64_t)
 
 #define opt_get_custom_types
 
@@ -94,11 +100,15 @@ opt_new_type(bool)
 opt_new_type(char)
 opt_new_type(double)
 opt_new_type(float)
-opt_new_type(unsigned)
 
 opt_new_type_t(int8_t)
 opt_new_type_t(int16_t)
 opt_new_type_t(int32_t)
 opt_new_type_t(int64_t)
+
+opt_new_type_t(uint8_t)
+opt_new_type_t(uint16_t)
+opt_new_type_t(uint32_t)
+opt_new_type_t(uint64_t)
 
 #endif // _OPTION_H_
