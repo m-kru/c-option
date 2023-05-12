@@ -20,10 +20,11 @@
 	opt_some_case(char),\
 	opt_some_case(double),\
 	opt_some_case(float),\
-	opt_some_case(int),\
-	opt_some_case(long),\
-	opt_some_case(short),\
-	opt_some_case(unsigned)
+	opt_some_case(unsigned),\
+	opt_some_case(int8_t),\
+	opt_some_case(int16_t),\
+	opt_some_case(int32_t),\
+	opt_some_case(int64_t)
 
 #define some(x) _Generic((x),\
 	opt_some_custom_types\
@@ -32,16 +33,18 @@
 
 
 #define opt_get_case(type) opt_ ## type ##_t: _opt_ ## type ## _get
+#define opt_get_case_t(type) opt_ ## type: _opt_ ## type ## _get
 
 #define opt_get_std_types\
 	opt_get_case(bool),\
 	opt_get_case(char),\
 	opt_get_case(double),\
 	opt_get_case(float),\
-	opt_get_case(int),\
-	opt_get_case(long),\
-	opt_get_case(short),\
-	opt_get_case(unsigned)
+	opt_get_case(unsigned),\
+	opt_get_case_t(int8_t),\
+	opt_get_case_t(int16_t),\
+	opt_get_case_t(int32_t),\
+	opt_get_case_t(int64_t)
 
 #define opt_get_custom_types
 
@@ -69,13 +72,33 @@ bool _opt_ ## type ## _get(opt_ ## type ## _t o, type *i) {\
 	return true;\
 }
 
-opt_new_type(bool);
-opt_new_type(char);
-opt_new_type(double);
-opt_new_type(float);
-opt_new_type(int);
-opt_new_type(long);
-opt_new_type(short);
-opt_new_type(unsigned);
+#define opt_new_type_t(type)\
+typedef struct {bool _none; type _x;} opt_ ## type;\
+\
+static inline __attribute__((always_inline))\
+opt_ ## type  _opt_ ## type (type x) { \
+	opt_ ## type o = {._none = false, ._x = x}; \
+	return o; \
+}\
+\
+__attribute__((warn_unused_result))\
+static inline __attribute__((always_inline))\
+bool _opt_ ## type ## _get(opt_ ## type o, type *i) {\
+	if (o._none)\
+		return false;\
+	*i = o._x;\
+	return true;\
+}
+
+opt_new_type(bool)
+opt_new_type(char)
+opt_new_type(double)
+opt_new_type(float)
+opt_new_type(unsigned)
+
+opt_new_type_t(int8_t)
+opt_new_type_t(int16_t)
+opt_new_type_t(int32_t)
+opt_new_type_t(int64_t)
 
 #endif // _OPTION_H_
