@@ -8,7 +8,7 @@ As types from `stdint.h` always have specified width they are favored over C sta
 ## Why?
 
 Sometimes there is a difference between data zero value and no data at all.
-In such case C offers pointers and checking against `NULL`.
+In such a case C offers pointers and checking against `NULL`.
 However, such apporach has at least two drawbacks:
 
 1. It is quite easy to dereference pointer without checking if it is not `NULL`.
