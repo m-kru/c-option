@@ -112,11 +112,17 @@ opt_new_type(my_t);
 #endif // _MY_OPTION_H_
 ```
 
+Most of what is seen in the above listing is copied only once.
 As one can see, `my_t` is used in three places.
 This is verbose.
 If you know how to do it better, please let me know.
 The good news is if you miss any of the three macros, the compilation will exit with error.
 
+To add support for next custom type three macro calls are needed:
+- `opt_new_type` / `opt_new_type_t`,
+- `opt_some_case`,
+- `opt_get_case` / `opt_get_case_t`.
+-
 `opt_some_case` is common. Use:
 - `opt_new_type` and `opt_get_case` if your type name **does not have** the `_t` suffix,
 - `opt_new_type_t` and `opt_get_case_t` if your type name **has** the `_t` suffix.
