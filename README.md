@@ -15,7 +15,7 @@ However, such apporach has at least two drawbacks:
 2. In some contexts dynamic memory allocation would be required, and bare-metal embedded systems usually do not support dynamic memory allocation (for good reasons).
 
 This module implements option type not requiring dynamic memory allocation and being much more safer than using a pointer.
-In case of unused return value from `opt_get` compiler will issue the warning:
+In case of unused return value from the `opt_get` compiler will issue the warning:
 ```
 In file included from main.c:4:
 main.c: In function ‘main’:
