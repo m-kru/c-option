@@ -73,6 +73,7 @@ int main(int argc, char *argv[]) {
 
 One possible way to add custom option types is to create a separate `option.h` header within the project.
 In the custom `option.h` include `option.h` from this repository.
+In your project files include your custom `option.h` header.
 Then use proper macros to add custom option types.
 
 ```C
@@ -119,6 +120,8 @@ The good news is if you miss any of the three macros, the compilation will exit 
 `opt_some_case` is common. Use:
 - `opt_new_type` and `opt_get_case` if your type name **does not have** the `_t` suffix,
 - `opt_new_type_t` and `opt_get_case_t` if your type name **has** the `_t` suffix.
+
+You can also implement a simple Perl or Python script that will automatically generate your custom option header file based on whatever input you want.
 
 ## Safety
 This module does not guarantee 100% safety.
