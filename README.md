@@ -53,14 +53,14 @@ int main(int argc, char *argv[]) {
 	opt_int32_t o = none;
 	int32_t i;
 
-	if (opt_get(o, &i))
+	if opt_get(o, &i)
 		printf("some(%d)\n", i);
 	else
 		printf("none\n");
 
 	o = foo();
 
-	if (opt_get(o, &i))
+	if opt_get(o, &i)
 		printf("some(%d)\n", i);
 	else
 		printf("none\n");
