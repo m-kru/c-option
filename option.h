@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// https://github.com/m-kru/c-panic
+// https://github.com/m-kru/c-option
 // Copyright (c) 2023 Michał Kruszewski
 
 #ifndef _OPTION_H_
@@ -7,7 +7,9 @@
 
 #include <stdbool.h>
 
+// none macro shall be used to assign none value to data of any option type.
 #define none {._none = true}
+// is_none macro shall be used to check if data of option type is none.
 #define is_none(o) (o._none)
 
 
@@ -29,6 +31,7 @@
 	opt_some_case(uint32_t),\
 	opt_some_case(uint64_t)
 
+// some macro shall be used to assign some value to data of any option type. 
 #define some(x) _Generic((x),\
 	opt_some_custom_types\
 	opt_some_std_types\
@@ -54,7 +57,10 @@
 
 #define opt_get_custom_types
 
-#define opt_get(o, ptr) _Generic((o),\
+// opt_get shall be used to get option internal value.
+// It returns true if option is some, and false if value is none.
+// A compiler issues an warning if return value from opt_get is not used. 
+ #define opt_get(o, ptr) _Generic((o),\
 	opt_get_custom_types\
 	opt_get_std_types\
 )(o, ptr)

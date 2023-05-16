@@ -9,7 +9,7 @@ typedef struct {
 	int b;
 } custom_t;
 
-opt_new_type(custom_t);
+opt_new_type_t(custom_t);
 
 #undef opt_some_custom_types
 #define opt_some_custom_types\
@@ -22,7 +22,7 @@ opt_new_type(custom_t);
 
 #undef opt_get_custom_types
 #define opt_get_custom_types\
-	opt_get_case(custom_t),
+	opt_get_case_t(custom_t),
 #undef opt_get
 #define opt_get(o, ptr) _Generic((o),\
 	opt_get_custom_types\
@@ -162,7 +162,7 @@ void test_opt_uint64_t(void) {
 }
 
 void test_opt_custom_type(void) {
-	opt_custom_t_t o = none;
+	opt_custom_t o = none;
 	assert(is_none(o));
 
 	o = some((

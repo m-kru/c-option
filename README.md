@@ -70,3 +70,57 @@ int main(int argc, char *argv[]) {
 ```
 
 ### Custom types
+
+One possible way to add custom option types is to create a separate `option.h` header within the project.
+In the custom `option.h` include `option.h` from this repository.
+Then use proper macros to add custom option types.
+
+```C
+#ifndef _MY_OPTION_H_
+#define _MY_OPTION_H_
+
+#include <c-option/option.h
+
+// Do whatever you want. This is normal header file.
+
+typedef struct {
+	int a;
+	int b;
+} my_t;
+
+opt_new_type(my_t);
+
+#undef opt_some_custom_types
+#define opt_some_custom_types\
+	opt_some_case(my_t),
+#undef some
+#define some(x) _Generic((x),\
+	opt_some_custom_types\
+	opt_some_std_types\
+)(x)
+
+#undef opt_get_custom_types
+#define opt_get_custom_types\
+	opt_get_case(my_t),
+#undef opt_get
+#define opt_get(o, ptr) _Generic((o),\
+	opt_get_custom_types\
+	opt_get_std_types\
+)(o, ptr)
+
+#endif // _MY_OPTION_H_
+```
+
+As one can see, `my_t` is used in three places.
+This is verbose.
+If you know how to do it better, please let me know.
+The good news is if you miss any of the three macros, the compilation will exit with error.
+
+`opt_some_case` is common. Use:
+- `opt_new_type` and `opt_get_case` if your type name **does not have** the `_t` suffix,
+- `opt_new_type_t` and `opt_get_case_t` if your type name **has** the `_t` suffix.
+
+## Safety
+This module does not guarantee 100% safety.
+However, it is much safer to use than pointer approach if you follow the rules.
+Theoretically, with access to the AST (Abstract Syntax Tree) it should be possible to implement a linter that would guarantee 100% safety.
