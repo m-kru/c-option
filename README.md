@@ -39,7 +39,7 @@ However, methods for setting a value to `none` or `some`, or getting the value `
 
 Simply `#include "option.h"`.
 
-```C
+```c
 #include <stdio.h>
 #include <stdint.h>
 
@@ -76,7 +76,7 @@ In the custom `option.h` include `option.h` from this repository.
 In your project files include your custom `option.h` header.
 Then use proper macros to add custom option types.
 
-```C
+```c
 #ifndef _MY_OPTION_H_
 #define _MY_OPTION_H_
 
